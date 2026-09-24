@@ -1,0 +1,32 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Bookshelf {
+    private final String name;
+    private final Bookcase bookcase;
+    private final List<Book> books = new ArrayList<>();
+
+    Bookshelf(String name, Bookcase bookcase){
+        this.name = name;
+        this.bookcase = bookcase;
+    }
+
+    public String getName()    { return name; }
+    public Bookcase getBookcase() { return bookcase; }
+
+    public String getFullAddress() {
+        return bookcase.getRoom().getName() + " → "
+                + bookcase.getName() + " → " + name;
+    }
+
+    public List<Book> getBooks() {
+        return new ArrayList<>(books);
+    }
+
+    @Override
+    public String toString() {
+        return getFullAddress();
+    }
+
+
+}
