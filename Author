@@ -6,8 +6,18 @@ public class Author {
 
     public Author(String Name,String Surname){
         this.Name = Name;
-        this.Surname = Name;
+        this.Surname = Surname;
     }
+
+    public String getName() {
+        return Name;
+    }
+
+    public String getSurname() {
+        return Surname;
+    }
+
+    public String getFullName(){return Name + " " + Surname;}
 
     @Override
     public boolean equals(Object o) {
@@ -20,5 +30,10 @@ public class Author {
     @Override
     public int hashCode() {
         return Objects.hash(Name, Surname);
+    }
+
+    @Override
+    public String toString() {
+        return getFullName();
     }
 }
