@@ -1,0 +1,38 @@
+import java.time.LocalDate;
+
+public class Loan {
+
+    private final Book book;
+    private final LocalDate loanDate;
+    private final LocalDate dueDate;
+    private LocalDate returnDate;
+
+    public Loan(Book book, LocalDate loanDate, LocalDate dueDate) {
+        this.book = book;
+        this.loanDate = loanDate;
+        this.dueDate = dueDate;
+        this.returnDate = null;
+    }
+
+    public boolean isReturned() {
+        return returnDate != null;
+    }
+
+    public boolean isOverdue(LocalDate asOfDate) {
+        return !isReturned() && asOfDate.isAfter(dueDate);
+    }
+
+    public void returnBook(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    @Override
+    public String toString() {
+        String status = isReturned()
+                ? "возвращена " + returnDate
+                : "на руках (срок: " + dueDate + ")";
+        return "Выдача: " + book.getBookName()
+                + " — выдана " + loanDate + ", " + status;
+    }
+
+}
