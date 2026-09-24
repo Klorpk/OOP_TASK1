@@ -3,14 +3,20 @@ import java.util.Objects;
 public class Book {
     private final String isbn;
     private final String BookName;
-    private final String Author;
-    private final String Genre;
+    private final Author Author;
+    private final Genre Genre;
+    private final Bookshelf bookshelf;
 
-    public Book(String isbon,String BookName,String Author,String Genre){
+    public Book(String isbon,String BookName,Author Author,Genre Genre,Bookshelf bookshelf){
         this.isbn = isbon;
         this.BookName = BookName;
         this.Author = Author;
         this.Genre = Genre;
+        this.bookshelf = bookshelf;
+    }
+
+    public String getBookName() {
+        return BookName;
     }
 
     @Override
@@ -21,6 +27,10 @@ public class Book {
         return Objects.equals(isbn, other.isbn);
     }
 
+    public String getLocationAddress() {
+        return bookshelf != null ? bookshelf.getFullAddress() : "не размещён";
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(isbn);
@@ -28,6 +38,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return"\"" + BookName + "\" - " + Author +" (" + Genre + ", ISBN: " + isbn + ")";
+        return"\"" + BookName + "\" - " + Author +" (" + Genre + ", ISBN: " + isbn + ")\nРасположение: " + getLocationAddress();
     }
+
 }
