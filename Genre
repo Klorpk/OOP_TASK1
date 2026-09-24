@@ -1,0 +1,27 @@
+public enum Genre {
+    FICTION("Художественная литература"),
+    NON_FICTION("Ненаучная литература"),
+    SCIENCE("Научная литература"),
+    HISTORY("История"),
+    FANTASY("Фэнтези"),
+    DETECTIVE("Детектив"),
+    POETRY("Поэзия"),
+    DRAMA("Драма"),
+    BIOGRAPHY("Биография"),
+    CHILDREN("Детская литература");
+
+    private final String displayName;
+
+    Genre(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    @Override
+    public String toString() {
+        return displayName;
+    }
+}
