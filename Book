@@ -1,0 +1,33 @@
+import java.util.Objects;
+
+public class Book {
+    private final String isbn;
+    private final String BookName;
+    private final String Author;
+    private final String Genre;
+
+    public Book(String isbon,String BookName,String Author,String Genre){
+        this.isbn = isbon;
+        this.BookName = BookName;
+        this.Author = Author;
+        this.Genre = Genre;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book other = (Book) o;
+        return Objects.equals(isbn, other.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(isbn);
+    }
+
+    @Override
+    public String toString() {
+        return"\"" + BookName + "\" - " + Author +" (" + Genre + ", ISBN: " + isbn + ")";
+    }
+}
