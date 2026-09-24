@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Room {
+    private final String name;
+    private final List<Bookcase> bookcases = new ArrayList<>();
+
+    public Room(String Name) {
+        this.name = Name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public Bookcase addBookcase(String bookcaseName){
+        Bookcase bookcase = new Bookcase(bookcaseName, this);
+        bookcases.add(bookcase);
+        return bookcase;
+    }
+
+    public List<Bookcase> getBookcases() {
+        return new ArrayList<>(bookcases);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+}
