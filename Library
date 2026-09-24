@@ -1,0 +1,64 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Library {
+    private final String name;
+    private final List<Room> rooms = new ArrayList<>();
+    private final Map<String, Book> booksByIsbn = new HashMap<>();
+    private final List<Loan> loans = new ArrayList<>();
+
+
+    public Library(String name) {
+        this.name = name;
+    }
+
+    public String getName() { return name; }
+
+    public Room addRoom(String name) {
+        Room room = new Room(name);
+        rooms.add(room);
+        return room;
+    }
+
+    public List<Room> getRooms() {
+        return new ArrayList<>(rooms);
+    }
+
+    public Book addBook(String isbn, String BookName, Author author, Genre genre, Bookshelf bookshelf) {
+        Book existing = booksByIsbn.get(isbn);
+        if (existing != null) return existing;
+        Book book = new Book(isbn, BookName, author, genre,bookshelf);
+        booksByIsbn.put(isbn, book);
+        return book;
+    }
+
+    public Book findBookByIsbn(String isbn) {
+        return booksByIsbn.get(isbn);
+    }
+
+    public Collection<Book> getAllBooks() {
+        return Collections.unmodifiableCollection(booksByIsbn.values());
+    }
+
+    public List<Book> searchByAuthor(String authorName) {
+        String lower = authorName.toLowerCase();
+        return booksByIsbn.values().stream()
+                .filter(b -> b.getAuthor() != null
+                        && b.getAuthor().getFullName().toLowerCase().contains(lower))
+                .collect(Collectors.toList());
+    }
+
+    public List<Book> searchByBookName(String BookName) {
+        String lower = BookName.toLowerCase();
+        return booksByIsbn.values().stream()
+                .filter(b -> b.getBookName().toLowerCase().contains(lower))
+                .collect(Collectors.toList());
+    }
+
+    public List<Book> searchByGenre(Genre genre) {
+        return booksByIsbn.values().stream()
+                .filter(b -> b.getGenre() == genre)
+                .collect(Collectors.toList());
+    }
+
+}
